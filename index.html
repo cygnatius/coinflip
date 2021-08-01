@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="flexbox-container">
+                <h1>{{ title }}</h1>
+                <div v-show="flips.length > 0" v-on:click="coinflip" class="coin-image">
+                    <img v-show="flips[0] == 'heads'" :src="heads" alt="">
+                    <img v-show="flips[0] == 'tails'" :src="tails" alt="">
+                </div>
+                <ul>
+                    <li v-for="flip in flips">{{ flip }}</li>
+                </ul>
+                <button v-show="flips.length == 0" @click="coinflip" >Flip the coin</button>
+            </div>
+        </div>
+        <script src="app.js"></script>
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
+    </body>
+</html>
