@@ -14,8 +14,12 @@
             <div class="flexbox-container">
                 <h1>{{ title }}</h1>
                 <div v-show="flips.length > 0" v-on:click="coinflip" class="coin-image">
-                    <img v-show="flips[0] == 'heads'" :src="heads" alt="">
-                    <img v-show="flips[0] == 'tails'" :src="tails" alt="">
+                    <h3>Total Flips</h3>
+                    <h4>Heads: {{ headsFlipped }}</h4>
+                    <h4>Tails: {{ tailsFlipped }}</h4>
+                    <img v-show="flips[0] == 'heads'" :src="headsimg" alt="">
+                    <img v-show="flips[0] == 'tails'" :src="tailsimg" alt="">
+                    <p>Click the coin to reflip!</p>
                 </div>
                 <ul>
                     <li v-for="flip in flips">{{ flip }}</li>

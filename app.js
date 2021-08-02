@@ -4,8 +4,8 @@ const app = Vue.createApp({
             title: 'Coinflipper',
             // flips: ['heads', 'tails', 'heads', 'heads', 'tails'],
             flips: [],
-            heads: 'img/headslg.png',
-            tails: 'img/tailslg.png'
+            headsimg: 'img/headslg.png',
+            tailsimg: 'img/tailslg.png'
         }
     },
     methods: {
@@ -15,6 +15,26 @@ const app = Vue.createApp({
             } else {
                 this.flips.unshift('tails')
             }
+        }
+    },
+    computed: {
+        headsFlipped() {
+            heads = 0
+            this.flips.forEach(function(flip) {
+                if(flip == 'heads') {
+                    heads = heads +1
+                }
+            })
+            return heads
+        },
+        tailsFlipped() {
+            tails = 0
+            this.flips.forEach(function(flip) {
+                if(flip == 'tails') {
+                    tails = tails +1
+                }
+            })
+            return tails
         }
     }
 })
