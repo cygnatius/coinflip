@@ -13,23 +13,41 @@
         <div id="app">
             <div class="flexbox-container">
                 <h1>{{ title }}</h1>
-                <div v-show="flips.length > 0" v-on:click="coinflip" class="coin-image">
-                    <h3>Total Flips</h3>
-                    <h4>Heads: {{ headsFlipped }}</h4>
-                    <h4>Tails: {{ tailsFlipped }}</h4>
-                    <img v-show="flips[0] == 'heads'" :src="headsimg" alt="">
-                    <img v-show="flips[0] == 'tails'" :src="tailsimg" alt="">
-                    <p>Click the coin to reflip!</p>
+                <label for="coincount">Number of coins:</label>
+                <input v-model="coins" type="number" id="coincount" name="coincount" min="1" value="1" oninput="this.value|=0">
+                <div v-show="flips.length > 0">
+                    <div>
+                        <h3>Total Flips</h3>
+                        <h4>Heads: {{ headsFlipped }}</h4>
+                        <h4>Tails: {{ tailsFlipped }}</h4>
+                    </div>
+                    <div>
+                        <div v-show="lastFlipCoinCount > 1">
+                            <h3>Flips this set</h3>
+                            <h4>Heads: {{ headsFlippedThisSet }}</h4>
+                            <h4>Tails: {{ tailsFlippedThisSet }}</h4>
+                        </div>
+                        <div v-show="lastFlipCoinCount == 1">
+                            <img v-on:click="coinflip" v-show="flips[0] == 'heads'" :src="headsimg" alt="">
+                            <img v-on:click="coinflip" v-show="flips[0] == 'tails'" :src="tailsimg" alt="">
+                            <p>Click the coin to reflip!</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button v-show="flips.length == 0 || lastFlipCoinCount > 1" @click="coinflip" >Flip the coin/s</button>
                 </div>
                 <ul>
-                    <li v-for="flip in flips">{{ flip }}</li>
+                    <li v-for="set in flips">
+                        <ul>
+                            <li v-for="flip in set">
+                                {{ flip }}
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-                <button v-show="flips.length == 0" @click="coinflip" >Flip the coin</button>
             </div>
         </div>
         <script src="app.js"></script>
-        <script>
-            const mountedApp = app.mount('#app')
-        </script>
     </body>
 </html>
